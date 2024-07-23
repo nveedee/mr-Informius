@@ -3,6 +3,7 @@ import Card from "./components/Card"
 import Calendar from "./components/Calendar"
 import SbbApi from "./components/SbbApi";
 import Uhr from "./components/Uhr.tsx";
+import Weather from "./components/Weather.tsx";
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
                             <Uhr></Uhr>
                         </Card>
                         <Card>
-                            <Uhr></Uhr>
+                            <Weather></Weather>
                         </Card>
                     </div>
 
