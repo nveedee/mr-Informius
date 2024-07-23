@@ -30,3 +30,6 @@
   justify-content: center;
   align-items: center;
 }
+.outer {
+  height: 100%;
+}

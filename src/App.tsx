@@ -18,8 +18,8 @@ function App() {
                         <Card >
                             <Uhr></Uhr>
                         </Card>
-                        <Card>
-                            <Weather></Weather>
+                        <Card >
+                            <Weather ></Weather>
                         </Card>
                     </div>
 

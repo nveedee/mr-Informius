@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "../styles/weather.module.css"
 
 type WeatherData = {
     main: Main;
