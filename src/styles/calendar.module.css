@@ -1,8 +1,10 @@
 .event {
-    background: #ffcc00;
-    border-radius: 3px;
-    padding: 2px 4px;
     color: #000;
     font-size: 12px;
-    margin: 2px;
+    cursor: pointer; /* Zeigt einen Pointer-Cursor an, wenn man über ein Ereignis hovert */
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgba(154, 154, 154, 0.6); /* Heller Hintergrund für die Ereignisse */
+    margin: 2px 0;
+    text-align: center;
 }
