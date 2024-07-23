@@ -1,9 +1,14 @@
 import React from 'react';
 import styles from '../styles/card.module.css';
 
-const Card = ({ children }) => {
+interface CardProps {
+    children: React.ReactNode;
+    className?: string;
+}
+
+const Card: React.FC<CardProps> = ({ children, className = '' }) => {
     return (
-        <div className={styles.card}>
+        <div className={`${styles.card} ${className}`}>
             {children}
         </div>
     );

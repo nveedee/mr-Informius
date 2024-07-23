@@ -11,14 +11,21 @@ function App() {
         <body>
 
         <div className={"pageContainer"}>
-            <h1 className={"title"}>Mr. Informius</h1>
             <div className={"cardContainer"}>
-                <Card>
-                    <Uhr></Uhr>
-                </Card>
-                <Card>
-                    <SbbApi/>
-                </Card>
+                <div>
+                    <div className={"miniCard"}>
+                        <Card >
+                            <Uhr></Uhr>
+                        </Card>
+                        <Card>
+                            <Uhr></Uhr>
+                        </Card>
+                    </div>
+
+                    <Card>
+                        <SbbApi/>
+                    </Card>
+                </div>
 
                 <Card>
                     <Calendar/>

@@ -10,12 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@azure/msal-browser": "^3.19.1",
+    "@azure/msal-react": "^2.0.21",
     "antd": "^5.19.3",
+    "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "moment": "^2.30.1",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-clock": "^5.0.0",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-grid-layout": "^1.4.4",
+    "react-resizable": "^3.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

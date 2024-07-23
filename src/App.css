@@ -13,14 +13,20 @@
 }
 
 .cardContainer {
-  display: flex;
-  justify-content: center;
-  gap: 20px;  /* Space between cards */
-  flex-wrap: nowrap; /* Prevent wrapping */
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  max-height: 1vh;
+  min-height: 1vh;
 }
 
 .card {
   flex: 1 0 45%; /* Adjust width to fit both cards */
   max-width: 45%; /* Ensure cards don't exceed 45% of the container width */
+}
+
+.miniCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

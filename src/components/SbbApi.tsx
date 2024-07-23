@@ -7,7 +7,7 @@ export default function SbbApi() {
     const [stationboard, setStationboard] = useState([]);
 
     useEffect(() => {
-        fetch("https://transport.opendata.ch/v1/stationboard?station=Winterthur&limit=15")
+        fetch("https://transport.opendata.ch/v1/stationboard?station=Winterthur&limit=7")
             .then(res => res.json())
             .then(data => setStationboard(data.stationboard || []))
             .catch(error => console.error('Error fetching connections:', error));
