@@ -6,9 +6,13 @@ interface CardProps {
     className?: string;
 }
 
-const Card: React.FC<CardProps> = ({ children, className = '' }) => {
+interface CardProps {
+    onDoubleClick?: () => void
+}
+
+const Card: React.FC<CardProps> = ({children, className = '', onDoubleClick}) => {
     return (
-        <div className={`${styles.card} ${className}`}>
+        <div className={`${styles.card} ${className}`} onDoubleClick={onDoubleClick}>
             {children}
         </div>
     );

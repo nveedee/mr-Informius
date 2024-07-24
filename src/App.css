@@ -33,3 +33,10 @@ flex-direction: column;
 .outer {
   height: 100%;
 }
+
+.calendarCard{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
