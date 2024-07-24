@@ -8,9 +8,3 @@
     margin: 2px 0;
     text-align: center;
 }
-.calendarCard {
-    min-height: 90vh;
-    max-height: 90vh;
-    position: relative;
-    margin: 0; /* Falls du einen kleinen Abstand zum unteren Rand benötigst */
-}
