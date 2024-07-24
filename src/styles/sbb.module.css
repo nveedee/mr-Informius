@@ -3,9 +3,11 @@
 .container {
     font-family: "Roboto", sans-serif;
     margin-top: 3rem;
+    min-height: 52vh;
+    max-height: 52vh;
 }
 
-.styled-table {
+.styledTable {
     width: 100%;
     border-collapse: separate; /* Changed from collapse to separate */
     border-spacing: 0;
@@ -13,35 +15,71 @@
     overflow: hidden; /* Ensures the rounded corners are visible */
 }
 
-.styled-table th, .styled-table td {
+.styledTable th, .styledTable td {
     padding: 12px 15px;
     border: 1px solid #ddd;
     text-align: left;
 }
 
-.styled-table th {
+.styledTable th {
     background-color: #003087;
     color: #fff;
 }
 
-.styled-table td {
+.styledTable td {
     background-color: #005cbf;
     color: #fff;
 }
 
 /* Optional: Add some styling to the first and last cells to ensure the corners are rounded */
-.styled-table thead th:first-child {
+.styledTable thead th:first-child {
     border-top-left-radius: 10px;
 }
 
-.styled-table thead th:last-child {
+.styledTable thead th:last-child {
     border-top-right-radius: 10px;
 }
 
-.styled-table tbody tr:last-child td:first-child {
+.styledTable tbody tr:last-child td:first-child {
     border-bottom-left-radius: 10px;
 }
 
-.styled-table tbody tr:last-child td:last-child {
+.styledTable tbody tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
+}
+
+.helloWorldContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    min-height: 52vh;
+    max-height: 52vh;
+}
+
+
+
+.cardTitleHelloWorld {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.rankingsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.rankingsItem {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.rankingsItem:last-child {
+    border-bottom: none;
 }
