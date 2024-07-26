@@ -7,6 +7,12 @@ const AUTH_URL = 'http://192.168.100.16:8080/api/auth/authenticate';
 const TOKEN_REFRESH_INTERVAL = 12 * 60 * 60 * 1000; // 12 Stunden in Millisekunden
 const SBB_REFRESH_INTERVAL = 60 * 1000; // 1 Minute in Millisekunden
 
+type LeaderbordUser = {
+    username: string
+    points: number
+}
+
+
 // Liste der Motivationssprüche
 const MOTIVATION_QUOTES = [
     {
@@ -15,9 +21,9 @@ const MOTIVATION_QUOTES = [
         description: "Travis Scott, ein US-amerikanischer Rapper und Produzent, ist bekannt für seine innovativen musikalischen Projekte und seine prägende Rolle in der modernen Hip-Hop-Szene."
     },
     {
-        text: "Hör nie auf, an dich selbst zu glauben, selbst wenn es niemand sonst tut.",
-        author: "Kanye West",
-        description: "Kanye West ist ein amerikanischer Rapper, Produzent und Modedesigner, bekannt für seine kreative Vision und seine Beiträge zur Musik- und Modewelt."
+        text: "Je grösser das Schoggibrot, desto besser wird der Tag",
+        author: "Elias Zulauf",
+        description: "Motivierter und konzentrieter Lehrling aus dem Jahrgang 2023"
     },
     {
         text: "Glaube an deine Träume, auch wenn die ganze Welt dagegen ist.",
@@ -44,7 +50,7 @@ export default function SbbApi() {
     const [motivation, setMotivation] = useState({ text: "", author: "", description: "" });
 
     const fetchStationboard = () => {
-        fetch("https://transport.opendata.ch/v1/stationboard?station=Winterthur&limit=7")
+        fetch("https://transport.opendata.ch/v1/stationboard?station=Winterthur&limit=9")
             .then(res => res.json())
             .then(data => setStationboard(data.stationboard || []))
             .catch(error => console.error('Error fetching connections:', error));
@@ -225,3 +231,5 @@ export default function SbbApi() {
         </div>
     );
 }
+
+

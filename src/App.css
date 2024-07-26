@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 .pageContainer {
   display: flex;
@@ -20,11 +22,6 @@ flex-direction: column;
   min-height: 1vh;
 }
 
-.card {
-  flex: 1 0 45%; /* Adjust width to fit both cards */
-  max-width: 45%; /* Ensure cards don't exceed 45% of the container width */
-}
-
 .miniCard {
   display: flex;
   justify-content: center;
@@ -39,4 +36,12 @@ flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.doubleclick{
+  margin-top: 2rem;
+}
+
+.fa-keyboard{
+  width: 100vw;
 }
