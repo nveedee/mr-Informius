@@ -13,3 +13,9 @@
     width: 52vw;
     margin: 0; /* Falls du einen kleinen Abstand zum unteren Rand benötigst */
 }
+
+.menuPlanImage {
+    max-width: 100%; /* Setze die maximale Breite des Bildes auf 50% der Containerbreite */
+    max-height: 100%; /* Setze die maximale Höhe des Bildes auf 50% der Containerhöhe */
+    object-fit: contain; /* Verhindert das Verzerren des Bildes */
+}

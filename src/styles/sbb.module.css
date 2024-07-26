@@ -48,7 +48,7 @@
     border-bottom-right-radius: 10px;
 }
 
-.helloWorldContainer {
+.leaderBoardContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +62,7 @@
 
 
 
-.cardTitleHelloWorld {
+.cardtitleLeaderboard {
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
@@ -82,4 +82,58 @@
 
 .rankingsItem:last-child {
     border-bottom: none;
+}
+
+.motivationCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f4f8;
+    border-radius: 12px;
+    width: 100%;
+    margin: 1rem auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    min-height: 53vh;
+    max-height: 53vh;
+}
+
+
+/* Titel der Motivationskarte */
+.cardTitleMotivation {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #003087; /* Dunkles Blau für den Titel */
+    text-align: center;
+}
+
+/* Text des Motivationsspruchs */
+.motivationText {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin: 1rem 0;
+    color: #333; /* Dunkelgrau für bessere Lesbarkeit */
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Autor des Motivationsspruchs */
+.motivationAuthor {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    color: #555; /* Mittelgrau für den Autor */
+    text-align: center;
+}
+
+/* Beschreibung der Person */
+.motivationDescription {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #666; /* Noch helleres Grau für die Beschreibung */
+    text-align: center;
+    margin-top: 1rem;
+    line-height: 1.6;
 }

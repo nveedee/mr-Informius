@@ -9,6 +9,7 @@ type WeatherData = {
 
 type Main = {
     temp: number;
+    humidity: number; // Hinzugefügt
 };
 
 type Wind = {
@@ -34,7 +35,8 @@ export default function WeatherCarousel() {
                 const data = await response.json();
                 setWeatherDataList([
                     data, // Originaldaten
-                    { ...data, wind: { ...data.wind } } // Kopie der Daten mit Windgeschwindigkeit
+                    { ...data, wind: { ...data.wind } }, // Kopie der Daten mit Windgeschwindigkeit
+                    { ...data, main: { ...data.main } }  // Kopie der Daten mit Luftfeuchtigkeit
                 ]);
             } catch (error) {
                 console.error("Failed to fetch weather data", error);
@@ -65,16 +67,7 @@ export default function WeatherCarousel() {
                 onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % weatherDataList.length)}
                 style={{ cursor: 'pointer' }}
             >
-                {currentIndex === 1 ? (
-                    <div>
-                        <h4 className={styles.temperature}>
-                           {data.wind.speed} m/s
-                        </h4>
-                        <p>
-                            Wind Direction: {windDirection(data.wind.deg)}
-                        </p>
-                    </div>
-                ) : (
+                {currentIndex === 0 && (
                     <div>
                         <h4 className={styles.temperature}>{data.main.temp}°C</h4>
                         <p>
@@ -86,12 +79,29 @@ export default function WeatherCarousel() {
                         </p>
                     </div>
                 )}
+                {currentIndex === 1 && (
+                    <div>
+                        <h4 className={styles.temperature}>
+                            {data.wind.speed} m/s
+                        </h4>
+                        <p>
+                            Wind Direction: {windDirection(data.wind.deg)}
+                        </p>
+                    </div>
+                )}
+                {currentIndex === 2 && (
+                    <div>
+                        <h4 className={styles.temperature}>
+                            Luftfeuchtigkeit: {data.main.humidity}%
+                        </h4>
+                    </div>
+                )}
             </div>
         );
     };
 
     return (
-        <div className={styles.weatherWrapper}>
+        <div >
             {weatherDataList.length > 0 && renderWeatherCard(weatherDataList[currentIndex])}
         </div>
     );

@@ -1,3 +1,4 @@
+/* index.css */
 body {
    margin: 0;
    padding: 0;
@@ -6,6 +7,21 @@ body {
    align-items: center;
    justify-content: center;
    height: 100vh;
-   background: linear-gradient(to bottom, #87CEEB, #cec88b);
+   transition: background 0.5s ease;
 }
 
+.morning-background {
+   background: linear-gradient(to bottom, #ffb347, #ffcc33); /* Morning colors: orange to yellow */
+}
+
+.noon-background {
+   background: linear-gradient(to bottom, #b3e2f6, #00BFFF); /* Noon colors: light blue to deep sky blue */
+}
+
+.afternoon-background {
+   background: linear-gradient(to bottom, #FFD700, #FF6347); /* Afternoon colors: gold to tomato */
+}
+
+.evening-background {
+   background: linear-gradient(to bottom, #2c3e50, #34495e); /* Evening colors: dark blue to dark gray */
+}

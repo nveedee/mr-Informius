@@ -5,8 +5,8 @@ import styles from '../styles/calendar.module.css'; // Importiere das Stylesheet
 
 // Beispiel-Daten für den Kalender mit Ereignissen, die mehrere Tage umfassen
 const events = [
-    { startDate: '2024-07-15', endDate: '2024-07-21', content: 'Da Vinci Projekt', description: 'Projektarbeit für Da Vinci - letzte Woche', color: '#ff9999' },
-    { startDate: '2024-07-22', endDate: '2024-07-28', content: 'Da Vinci Projekt', description: 'Projektarbeit für Da Vinci - diese Woche', color: '#99ff99' },
+    { startDate: '2024-07-15', endDate: '2024-07-19', content: 'Da Vinci Projekt', description: 'Projektarbeit für Da Vinci - letzte Woche', color: '#ff9999' },
+    { startDate: '2024-07-22', endDate: '2024-07-26', content: 'Da Vinci Projekt', description: 'Projektarbeit für Da Vinci - diese Woche', color: '#99ff99' },
     { startDate: '2024-07-29', endDate: '2024-08-18', content: '3 Wochen Urlaub', description: 'Urlaub für 3 Wochen', color: '#9999ff' },
     { startDate: '2024-08-19', endDate: '2024-08-19', content: 'Da Vinci Vorstellung', description: 'Vorstellung des Da Vinci Projekts', color: '#ffcc99' },
 ];
