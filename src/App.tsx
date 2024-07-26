@@ -75,8 +75,10 @@ function App() {
                                 Your browser does not support iframes, but you can visit <a
                                 href="https://data.zfv.ch/de/menus/plan/restaurant-axa-superblock"></a>
                             </iframe>
+
                         )}
                     </div>
+
                 </Card>
             </div>
         </div>
