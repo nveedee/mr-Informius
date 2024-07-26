@@ -11,7 +11,7 @@ body {
 }
 
 .morning-background {
-   background: linear-gradient(to bottom, #ffb347, #ffcc33); /* Morning colors: orange to yellow */
+   background: linear-gradient(to bottom, #2c3e50, #34495e); /* Evening colors: dark blue to dark gray */
 }
 
 .noon-background {
@@ -19,8 +19,9 @@ body {
 }
 
 .afternoon-background {
-   background: linear-gradient(to bottom, #FFD700, #FF6347); /* Afternoon colors: gold to tomato */
+   background: linear-gradient(to bottom, #b3e2f6, #00BFFF); /* Noon colors: light blue to deep sky blue */
 }
+
 
 .evening-background {
    background: linear-gradient(to bottom, #2c3e50, #34495e); /* Evening colors: dark blue to dark gray */

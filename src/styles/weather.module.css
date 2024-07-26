@@ -43,17 +43,12 @@
 }
 
 .weatherContainer .temperature {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
-    color: #ff5722; /* Warme Farbe für die Temperatur */
+    color: #000000; /* Warme Farbe für die Temperatur */
 }
 
 .weatherContainer:hover {
     transform: scale(1.05); /* Vergrößert die Karte leicht beim Hover */
 }
 
-.airHumidity {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #ff5722; /* Warme Farbe für die Temperatur */
-}

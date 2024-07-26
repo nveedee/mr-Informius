@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-clock/dist/Clock.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../styles/uhr.module.css"
+import styles from "../styles/uhr.module.css"
+
 
 
 const Clock = dynamic(() => import('react-clock'), { ssr: false });
@@ -22,10 +23,9 @@ export default function Uhr() {
     }
 
     return (
-        <div className="clock-background d-flex justify-content-center align-items-center">
-            <div className={"night-clock"}>
+        <div className={styles.clockContainer}>
                 <Clock value={value} size={300} renderNumbers={true} />
             </div>
-        </div>
+
     );
 }

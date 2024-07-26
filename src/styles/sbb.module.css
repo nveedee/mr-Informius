@@ -54,7 +54,6 @@
     align-items: center;
     justify-content: center;
     padding: 5rem;
-    background-color: #ffffff;
     border-radius: 10px;
     min-height: 52vh;
     max-height: 52vh;
@@ -89,11 +88,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f0f4f8;
     border-radius: 12px;
     width: 100%;
     margin: 1rem auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     min-height: 53vh;
     max-height: 53vh;
