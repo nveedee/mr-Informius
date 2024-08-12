@@ -13,19 +13,10 @@ body {
    transition: background 0.5s ease;
 }
 
-.morning-background {
+.night-background {
    background: linear-gradient(to bottom, #2c3e50, #34495e);
 }
 
-.noon-background {
+.day-background {
    background: linear-gradient(to bottom, #b3e2f6, #00BFFF);
-}
-
-.afternoon-background {
-   background: linear-gradient(to bottom, #b3e2f6, #00BFFF);
-}
-
-
-.evening-background {
-   background: linear-gradient(to bottom, #2c3e50, #34495e);
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import './App.css';
 import Card from "./components/Card";
 import Calendar from "./components/Calendar";
@@ -6,9 +6,14 @@ import SbbApi from "./components/SbbApi";
 import Uhr from "./components/Uhr";
 import Weather from "./components/Weather";
 import Keyboard from "./components/Keyboard.tsx";
+import Quotes from "./components/Quotes.tsx";
+import AxaCoin from "./components/AxaCoin.tsx";
 
 function App() {
     const [isClicked, setIsClicked] = useState<boolean>(true);
+    const [middleCard, setMiddleCard] = useState<number>(2);
+
+
     const [login, setlogin] = useState<boolean>(false);
     const [backgroundClass, setBackgroundClass] = useState('day-background');
     const [id, setid] = useState<string>("");
@@ -52,18 +57,23 @@ function App() {
         setIsClicked(!isClicked);
     }
 
+    function changecard() {
+        console.log(middleCard)
+        if (middleCard === 3) {
+            setMiddleCard(1)
+        } else {
+            setMiddleCard(middleCard + 1)
+        }
+    }
+
     // Effect to update the background class based on time of day
     useEffect(() => {
         const updateBackground = () => {
             const hours = new Date().getHours();
-            if (hours >= 6 && hours < 9) {
-                setBackgroundClass('morning-background');
-            } else if (hours >= 9 && hours < 12) {
-                setBackgroundClass('noon-background');
-            } else if (hours >= 12 && hours < 17) {
-                setBackgroundClass('afternoon-background');
+            if (hours >= 21 && hours < 9) {
+                setBackgroundClass('night-background');
             } else {
-                setBackgroundClass('evening-background');
+                setBackgroundClass('day-background');
             }
         };
 
@@ -91,8 +101,10 @@ function App() {
                             </Card>
                         </div>
 
-                        <Card>
-                            <SbbApi/>
+                        <Card onClick={changecard}>
+                            {middleCard === 1 && <SbbApi/>}
+                            {middleCard === 2 && <Quotes/>}
+                            {middleCard === 3 && <AxaCoin/>}
                         </Card>
                     </div>
 

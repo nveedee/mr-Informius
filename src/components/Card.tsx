@@ -1,20 +1,22 @@
 import styles from '../styles/card.module.css';
 
-interface CardProps {
+
+type CardProps = {
+    onDoubleClick?: () => void;
+    onClick?: () => void;
     children: React.ReactNode;
     className?: string;
 }
 
-interface CardProps {
-    onDoubleClick?: () => void
-}
+const Card: React.FC<CardProps> = ({children, className = '', onDoubleClick,onClick}) => {
 
-const Card: React.FC<CardProps> = ({children, className = '', onDoubleClick}) => {
-    return (
-        <div className={`${styles.card} ${className}`} onDoubleClick={onDoubleClick}>
-            {children}
-        </div>
-    );
+
+        return (
+            <div className={`${styles.card} ${className}`} onClick={onClick} onDoubleClick={onDoubleClick}>
+                {children}
+            </div>
+        );
+
 };
 
 export default Card;
