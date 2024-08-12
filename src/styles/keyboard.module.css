@@ -1,0 +1,57 @@
+.Tastatur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f3f4f6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    width: 70vw;
+
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 2px solid #d1d5db;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #2563eb;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 1em;
+    color: #000000;
+    background-color: #95b2f4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1e40af;
+}
+
+button:active {
+    background-color: #1d4ed8;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
+}
+
+button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}

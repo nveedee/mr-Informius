@@ -9,14 +9,20 @@ import Keyboard from "./components/Keyboard.tsx";
 import Quotes from "./components/Quotes.tsx";
 import AxaCoin from "./components/AxaCoin.tsx";
 
+type personData = {
+    id: string
+    userName : string
+}
+
 function App() {
     const [isClicked, setIsClicked] = useState<boolean>(true);
     const [middleCard, setMiddleCard] = useState<number>(2);
-
-
     const [login, setlogin] = useState<boolean>(false);
     const [backgroundClass, setBackgroundClass] = useState('day-background');
     const [id, setid] = useState<string>("");
+    const [currentId, setCurrentid] = useState<string>("");
+    const [currenData, setCurrentData] = useState<personData>();
+
 
     // Use useEffect to add event listener once
     useEffect(() => {
@@ -36,6 +42,7 @@ function App() {
                     .then(response => response.json())
                     .then(data => console.log('Success:', data))
                     .catch((error) => console.error('Error:', error));
+                setCurrentid(id)
                 setid("")
             } else {
                 setid(prevuid => prevuid + event.key);
@@ -70,7 +77,7 @@ function App() {
     useEffect(() => {
         const updateBackground = () => {
             const hours = new Date().getHours();
-            if (hours >= 21 && hours < 9) {
+            if (hours >= 21 || hours < 9) {
                 setBackgroundClass('night-background');
             } else {
                 setBackgroundClass('day-background');
@@ -83,41 +90,64 @@ function App() {
         return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
 
+    useEffect(() => {
+       fetchPersonData()
+    }, [currentId]);
+
+    function fetchPersonData(){
+        fetch(`http://localhost:8080/api/persons/${currentId}`)
+            .then(response => response.json())
+            .then(data => setCurrentData(data))
+            .catch((error) => console.error('Error:', error));
+    }
+
     return (
         <div className={`pageContainer ${backgroundClass}`}>
-            {login ?
-                <Keyboard/>
+            {login ? (
+                <div className={"Nameinput"}>
+                    <h3>Dein Name</h3>
+                    <h6><i>Mit diesem Namen werden deine Kollegen dich sehen</i></h6>
+                    <Keyboard id={currentId} onSubmit={() => {setlogin(false); fetchPersonData()}}/>
+                </div>
+            ) : (
+                <>
+                    {currentId && (
+                        <header>
+                            Guten Nachmittag {currenData?.userName}
+                            <div>
+                                <button>Settings</button>
+                                <button onClick={() => setCurrentid("")}>abmelden</button>
+                            </div>
+                        </header>
+                    )}
 
-                :
+                    <div className={"cardContainer"}>
+                        <div>
+                            <div className={"miniCard"}>
+                                <Card>
+                                    <Uhr/>
+                                </Card>
+                                <Card>
+                                    <Weather/>
+                                </Card>
+                            </div>
 
-                <div className={"cardContainer"}>
-                    <div>
-                        <div className={"miniCard"}>
-                            <Card>
-                                <Uhr/>
-                            </Card>
-                            <Card>
-                                <Weather/>
+                            <Card onClick={changecard}>
+                                {middleCard === 1 && <SbbApi/>}
+                                {middleCard === 2 && <Quotes/>}
+                                {middleCard === 3 && <AxaCoin/>}
                             </Card>
                         </div>
 
-                        <Card onClick={changecard}>
-                            {middleCard === 1 && <SbbApi/>}
-                            {middleCard === 2 && <Quotes/>}
-                            {middleCard === 3 && <AxaCoin/>}
-                        </Card>
-                    </div>
-
-                    <Card onDoubleClick={buttonHandler}>
-                        <div>
-                            {
-                                isClicked ?
+                        <Card onDoubleClick={buttonHandler}>
+                            <div>
+                                {isClicked ? (
                                     <div className={"calendarCard"}>
                                         <Calendar/>
                                         <img src="../public/icons8-double-click-24.png" alt="png"/>
                                         <p>Double click</p>
                                     </div>
-                                    :
+                                ) : (
                                     <div className={"calendarCard"}>
                                         <iframe onDoubleClick={buttonHandler} width="1000vh" height="970rem"
                                                 name="iframe-field_venue_iframe-232"
@@ -131,14 +161,12 @@ function App() {
                                              alt="png"/>
                                         <p>Double click</p>
                                     </div>
-                            }
-                        </div>
-
-                    </Card>
-                </div>
-
-
-            }
+                                )}
+                            </div>
+                        </Card>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

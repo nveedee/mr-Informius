@@ -7,6 +7,7 @@ flex-direction: column;
   align-items: center;
   padding: 20px;
   min-height: 100vh; /* Ensures the container fills the entire viewport height */
+  min-width: 100vw;
 }
 
 .title {
@@ -44,4 +45,76 @@ flex-direction: column;
 
 .fa-keyboard{
   width: 100vw;
+}
+
+
+
+/*Name Input Css*/
+.Nameinput {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 80vw;
+  margin: 200px auto;
+  text-align: center;
+}
+
+.Nameinput h3 {
+  font-size: 1.8em;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.Nameinput h6 {
+  font-size: 0.9em;
+  color: #6b7280;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.Nameinput h6 i {
+  color: #9ca3af;
+}
+
+.Nameinput .Tastatur {
+  margin-top: 20px;
+}
+
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #4A90E2; /* Dunkles Blau für den Header-Hintergrund */
+  color: #fff; /* Weißer Text */
+  font-size: 1.5rem; /* Größere Schrift für den Begrüßungstext */
+  border-radius: 8px; /* Abgerundete Ecken */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatten für Tiefe */
+  width: 80rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+
+  button {
+    background-color: #ffffff; /* Weißer Hintergrund für die Buttons */
+    color: #4A90E2; /* Gleiche blaue Farbe für den Text der Buttons */
+    border: 2px solid #4A90E2; /* Blauer Rand für die Buttons */
+    border-radius: 5px; /* Abgerundete Ecken für die Buttons */
+    padding: 8px 15px; /* Innenabstand für die Buttons */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 10px; /* Abstand zwischen den Buttons */
+  }
+
+  button:hover {
+    background-color: #4A90E2; /* Blauer Hintergrund bei Hover */
+    color: #ffffff; /* Weißer Text bei Hover */
+  }
 }

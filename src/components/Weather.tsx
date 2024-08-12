@@ -9,7 +9,7 @@ type WeatherData = {
 
 type Main = {
     temp: number;
-    humidity: number; // Hinzugefügt
+    humidity: number;
 };
 
 type Wind = {
