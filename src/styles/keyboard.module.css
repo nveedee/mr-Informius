@@ -29,14 +29,37 @@
 button {
     padding: 10px 15px;
     margin: 5px;
-    font-size: 1em;
+    font-size: 1.2em;
     color: #000000;
     background-color: #95b2f4;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    height: 3rem;
+    min-width: 3rem;
 }
+.space{
+    width: 20rem;
+}
+.submit{
+    width: 8rem;
+    background-color: #0039a3;
+    border: #000000;
+    color: #FFFFFF;
+}
+
+.inputfield{
+    display: flex;
+    align-items: center;
+    width: 60%;
+
+    button{
+        margin-left: 8px;
+        padding: 8px;
+    }
+}
+
 
 button:hover {
     background-color: #1e40af;

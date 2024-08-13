@@ -16,7 +16,7 @@ type personData = {
 
 function App() {
     const [isClicked, setIsClicked] = useState<boolean>(true);
-    const [middleCard, setMiddleCard] = useState<number>(2);
+    const [middleCard, setMiddleCard] = useState<number>(1);
     const [login, setlogin] = useState<boolean>(false);
     const [backgroundClass, setBackgroundClass] = useState('day-background');
     const [id, setid] = useState<string>("");
@@ -29,14 +29,13 @@ function App() {
         const handleKeypress = (event: KeyboardEvent) => {
             if (event.key === "Enter") {
                 setlogin(true)
-                fetch("http://localhost:8080/api/persons", // Make sure to use the correct protocol
+                fetch("http://localhost:8080/api/persons",
                     {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({id}) // Wrap id in an object to make it valid JSON
-
+                        body: JSON.stringify({id})
                     }
                 )
                     .then(response => response.json())
@@ -57,7 +56,7 @@ function App() {
         return () => {
             window.removeEventListener("keypress", handleKeypress);
         };
-    }, [id]); // Add id to the dependency array
+    }, [id]);
 
     // Function to toggle the state on double click
     function buttonHandler() {
@@ -113,7 +112,7 @@ function App() {
                 <>
                     {currentId && (
                         <header>
-                            Guten Nachmittag {currenData?.userName}
+                            <h1>Guten Nachmittag, {currenData?.userName}</h1>
                             <div>
                                 <button>Settings</button>
                                 <button onClick={() => setCurrentid("")}>abmelden</button>

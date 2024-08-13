@@ -1,59 +1,84 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/sbb.module.css";
 
 const MOTIVATION_QUOTES = [
     {
-        text: "Die einzige Limitierung ist die, die du dir selbst setzt.",
+        quote: "Die einzige Limitierung ist die, die du dir selbst setzt.",
         author: "Travis Scott",
-        description: "Travis Scott, ein US-amerikanischer Rapper und Produzent, ist bekannt für seine innovativen musikalischen Projekte und seine prägende Rolle in der modernen Hip-Hop-Szene."
+        category: "Travis Scott, ein US-amerikanischer Rapper und Produzent, ist bekannt für seine innovativen musikalischen Projekte und seine prägende Rolle in der modernen Hip-Hop-Szene."
     },
     {
-        text: "Je grösser das Schoggibrot, desto besser wird der Tag",
-        author: "Elias Zulauf",
-        description: "Motivierter und konzentrieter Lehrling aus dem Jahrgang 2023"
-    },
-    {
-        text: "Glaube an deine Träume, auch wenn die ganze Welt dagegen ist.",
+        quote: "Glaube an deine Träume, auch wenn die ganze Welt dagegen ist.",
         author: "J. Cole",
-        description: "J. Cole ist ein US-amerikanischer Rapper und Produzent, der für seine introspektiven Texte und seine ehrliche Musik bekannt ist."
+        category: "J. Cole ist ein US-amerikanischer Rapper und Produzent, der für seine introspektiven Texte und seine ehrliche Musik bekannt ist."
     },
     {
-        text: "Erfolg ist nicht nur, was du erreichst, sondern auch, was du überwindest.",
+        quote: "Erfolg ist nicht nur, was du erreichst, sondern auch, was du überwindest.",
         author: "Drake",
-        description: "Drake, ein kanadischer Rapper und Sänger, ist für seine Vielseitigkeit und seinen Einfluss auf die moderne Musiklandschaft bekannt."
+        category: "Drake, ein kanadischer Rapper und Sänger, ist für seine Vielseitigkeit und seinen Einfluss auf die moderne Musiklandschaft bekannt."
     },
     {
-        text: "Dein größter Feind ist die Angst vor dem Scheitern.",
+        quote: "Dein größter Feind ist die Angst vor dem Scheitern.",
         author: "Eminem",
-        description: "Eminem, ein amerikanischer Rapper und Songwriter, ist bekannt für seine ehrlichen und oft kontroversen Texte sowie seinen Einfluss auf das Genre des Hip-Hop."
+        category: "Eminem, ein amerikanischer Rapper und Songwriter, ist bekannt für seine ehrlichen und oft kontroversen Texte sowie seinen Einfluss auf das Genre des Hip-Hop."
     }
 ];
 
-export default function Quotes(){
-    const [motivation, setMotivation] = useState({ text: "", author: "", description: "" });
+type Quote = {
+    quote: string;
+    author: string;
+    category?: string;
+};
+
+export default function Quotes() {
+    const [motivation, setMotivation] = useState<Quote>();
+    const [lastFetchTime, setLastFetchTime] = useState<number>(0);
+
+    function getQuote() {
+        fetch("https://api.api-ninjas.com/v1/quotes", {
+            headers: { "x-api-key": "ql3uI+G2eMYRt8oeElKvKQ==EbCtcxpiBPrpIGWl" }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const apiQuote: Quote = {
+                        quote: data[0].quote,
+                        author: data[0].author,
+                        category: data[0].category // Use this if the API provides a category field
+                    };
+                    setMotivation(apiQuote);
+                    setLastFetchTime(Date.now()); // Store the time of the fetch
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching quotes:", error);
+                setMotivation(MOTIVATION_QUOTES[1]); // Fallback quote
+            });
+    }
 
     useEffect(() => {
-        const today = new Date();
-        const index = today.getDate() % MOTIVATION_QUOTES.length; // Wechselt jeden Tag
-        setMotivation(MOTIVATION_QUOTES[index]);
-    }, []);
+        const currentTime = Date.now();
+        const oneHour = 3600000; // 1 hour in milliseconds
 
-    return(
-        <>
-            <div className={styles.motivationCard}>
+        if (currentTime - lastFetchTime >= oneHour) {
+            getQuote(); // Fetch a new quote if more than an hour has passed since the last fetch
+        }
+    }, [lastFetchTime]);
 
-                <h2 className={styles.cardTitleMotivation}>Motivationsspruch des Tages</h2>
-                <blockquote className={styles.motivationText}>
-                    "{motivation.text}"
-                </blockquote>
-                <footer className={styles.motivationAuthor}>
-                    - {motivation.author}
-                </footer>
+    return (
+        <div className={styles.motivationCard}>
+            <h2 className={styles.cardTitleMotivation}>Quote der Stunde</h2>
+            <blockquote className={styles.motivationText}>
+                "{motivation?.quote}"
+            </blockquote>
+            <footer className={styles.motivationAuthor}>
+                - {motivation?.author}
+            </footer>
+            {motivation?.category && (
                 <p className={styles.motivationDescription}>
-                    {motivation.description}
+                   topic: {motivation.category}
                 </p>
-            </div>
-
-        </>
-    )
+            )}
+        </div>
+    );
 }
