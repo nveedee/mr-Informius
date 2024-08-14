@@ -32,10 +32,7 @@ export default function SbbApi() {
     const fetchStationboard = () => {
         fetch("https://transport.opendata.ch/v1/stationboard?station=Winterthur&limit=9")
             .then(res => res.json())
-            .then(data => {
-                setStationboard(data.stationboard || []);
-                console.log(data);
-            })
+            .then(data => setStationboard(data.stationboard || []))
             .catch(error => console.error('Error fetching connections:', error));
     };
 

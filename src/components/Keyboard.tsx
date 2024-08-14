@@ -22,8 +22,8 @@ export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
     }
 
     const handleSubmit = () => {
-        fetch(`http://localhost:8080/api/persons/${id}`, {
-            method: "PUT",
+        fetch(`http://localhost:8080/api/persons`, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -32,7 +32,7 @@ export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Success:", data);
-                // Aufruf der onSubmit Methode, wenn sie definiert ist
+
                 if (onSubmit) {
                     onSubmit();
                 }

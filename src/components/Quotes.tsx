@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import styles from "../styles/sbb.module.css";
+import {useEffect, useState} from 'react';
+import styles from '../styles/sbb.module.css';
 
 const MOTIVATION_QUOTES = [
     {
@@ -28,15 +28,22 @@ type Quote = {
     quote: string;
     author: string;
     category?: string;
-};
+}
 
 export default function Quotes() {
     const [motivation, setMotivation] = useState<Quote>();
-    const [lastFetchTime, setLastFetchTime] = useState<number>(0);
 
-    function getQuote() {
+
+
+    useEffect(() => {
+
+        fetchQuote()
+
+    }, []);
+
+    function fetchQuote() {
         fetch("https://api.api-ninjas.com/v1/quotes", {
-            headers: { "x-api-key": "ql3uI+G2eMYRt8oeElKvKQ==EbCtcxpiBPrpIGWl" }
+            headers: {"x-api-key": "ql3uI+G2eMYRt8oeElKvKQ==EbCtcxpiBPrpIGWl"}
         })
             .then(response => response.json())
             .then(data => {
@@ -44,41 +51,26 @@ export default function Quotes() {
                     const apiQuote: Quote = {
                         quote: data[0].quote,
                         author: data[0].author,
-                        category: data[0].category // Use this if the API provides a category field
+                        category: data[0].category
                     };
                     setMotivation(apiQuote);
-                    setLastFetchTime(Date.now()); // Store the time of the fetch
                 }
             })
             .catch(error => {
                 console.error("Error fetching quotes:", error);
-                setMotivation(MOTIVATION_QUOTES[1]); // Fallback quote
+                setMotivation(MOTIVATION_QUOTES[1]); // Fallback in case of an error
             });
     }
 
-    useEffect(() => {
-        const currentTime = Date.now();
-        const oneHour = 3600000; // 1 hour in milliseconds
-
-        if (currentTime - lastFetchTime >= oneHour) {
-            getQuote(); // Fetch a new quote if more than an hour has passed since the last fetch
-        }
-    }, [lastFetchTime]);
-
     return (
         <div className={styles.motivationCard}>
-            <h2 className={styles.cardTitleMotivation}>Quote der Stunde</h2>
+            <h2 className={styles.cardTitleMotivation}>Quote for you</h2>
             <blockquote className={styles.motivationText}>
                 "{motivation?.quote}"
             </blockquote>
             <footer className={styles.motivationAuthor}>
                 - {motivation?.author}
             </footer>
-            {motivation?.category && (
-                <p className={styles.motivationDescription}>
-                   topic: {motivation.category}
-                </p>
-            )}
         </div>
     );
 }

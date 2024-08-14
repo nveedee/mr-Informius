@@ -11,8 +11,9 @@ import AxaCoin from "./components/AxaCoin.tsx";
 
 type personData = {
     id: string
-    userName : string
+    userName: string
 }
+
 
 function App() {
     const [isClicked, setIsClicked] = useState<boolean>(true);
@@ -21,28 +22,24 @@ function App() {
     const [backgroundClass, setBackgroundClass] = useState('day-background');
     const [id, setid] = useState<string>("");
     const [currentId, setCurrentid] = useState<string>("");
-    const [currenData, setCurrentData] = useState<personData>();
+    const [currenData, setCurrentData] = useState<personData | null>(null);
+    const [dayTime, setDayTime] = useState<string>("Morgen");
 
 
     // Use useEffect to add event listener once
     useEffect(() => {
         const handleKeypress = (event: KeyboardEvent) => {
             if (event.key === "Enter") {
-                setlogin(true)
-                fetch("http://localhost:8080/api/persons",
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({id})
-                    }
+
+                fetch(`http://localhost:8080/api/persons/${id}`,
                 )
                     .then(response => response.json())
-                    .then(data => console.log('Success:', data))
-                    .catch((error) => console.error('Error:', error));
-                setCurrentid(id)
+                    .then(data => {
+                        console.log(data)
+                    })
+                    .catch(() => setlogin(true));
                 setid("")
+                setCurrentid(id)
             } else {
                 setid(prevuid => prevuid + event.key);
                 setlogin(false)
@@ -64,22 +61,25 @@ function App() {
     }
 
     function changecard() {
-        console.log(middleCard)
         if (middleCard === 3) {
-            setMiddleCard(1)
+            setMiddleCard(1);
         } else {
-            setMiddleCard(middleCard + 1)
+            setMiddleCard(middleCard + 1);
         }
     }
 
-    // Effect to update the background class based on time of day
     useEffect(() => {
         const updateBackground = () => {
             const hours = new Date().getHours();
-            if (hours >= 21 || hours < 9) {
+            if (hours >= 18 && hours < 24) {
                 setBackgroundClass('night-background');
-            } else {
+                setDayTime("Abend");
+            } else if (hours >= 12 && hours < 18) {
                 setBackgroundClass('day-background');
+                setDayTime("Nachmittag");
+            } else if (hours >= 0 && hours < 12) {
+                setBackgroundClass('night-background');
+                setDayTime("Morgen");
             }
         };
 
@@ -90,10 +90,12 @@ function App() {
     }, []);
 
     useEffect(() => {
-       fetchPersonData()
+        if (currentId) {
+            fetchPersonData();
+        }
     }, [currentId]);
 
-    function fetchPersonData(){
+    function fetchPersonData() {
         fetch(`http://localhost:8080/api/persons/${currentId}`)
             .then(response => response.json())
             .then(data => setCurrentData(data))
@@ -105,14 +107,17 @@ function App() {
             {login ? (
                 <div className={"Nameinput"}>
                     <h3>Dein Name</h3>
-                    <h6><i>Mit diesem Namen werden deine Kollegen dich sehen</i></h6>
-                    <Keyboard id={currentId} onSubmit={() => {setlogin(false); fetchPersonData()}}/>
+                    <h6><i>Du kannst den Namen später noch ändern</i></h6>
+                    <Keyboard id={currentId} onSubmit={() => {
+                        setlogin(false);
+                        fetchPersonData()
+                    }}/>
                 </div>
             ) : (
                 <>
                     {currentId && (
                         <header>
-                            <h1>Guten Nachmittag, {currenData?.userName}</h1>
+                            <h1>Guten {dayTime}, {currenData?.userName}</h1>
                             <div>
                                 <button>Settings</button>
                                 <button onClick={() => setCurrentid("")}>abmelden</button>
@@ -123,15 +128,11 @@ function App() {
                     <div className={"cardContainer"}>
                         <div>
                             <div className={"miniCard"}>
-                                <Card>
-                                    <Uhr/>
-                                </Card>
-                                <Card>
-                                    <Weather/>
-                                </Card>
+                                <Card><Uhr/></Card>
+                                <Card><Weather/></Card>
                             </div>
 
-                            <Card onClick={changecard}>
+                            <Card onClick={changecard} className={"middle-card"}>
                                 {middleCard === 1 && <SbbApi/>}
                                 {middleCard === 2 && <Quotes/>}
                                 {middleCard === 3 && <AxaCoin/>}
@@ -171,3 +172,5 @@ function App() {
 }
 
 export default App;
+
+
