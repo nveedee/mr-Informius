@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Calendar, Modal , ConfigProvider} from 'antd';
+import { Calendar, Modal, ConfigProvider } from 'antd';
 import moment from 'moment';
 import 'moment/locale/de';
+// @ts-ignore
 import * as ical from 'ical';
 import styles from '../styles/calendar.module.css';
 import en_GB from 'antd/lib/locale/en_GB';
@@ -23,7 +24,6 @@ function MyCalendar() {
             .then(data => {
                 const parsedEvents = parseIcsData(data);
                 setEvents(parsedEvents);
-                console.log(events)
             })
             .catch(error => console.error('Error fetching the ICS file:', error));
     }, []);
@@ -31,7 +31,6 @@ function MyCalendar() {
     const parseIcsData = (data: string): Event[] => {
         const parsedData = ical.parseICS(data);
         const events: Event[] = [];
-
 
         Object.values(parsedData).forEach((event: any) => {
             if (event.type === 'VEVENT') {
@@ -59,9 +58,10 @@ function MyCalendar() {
         return events;
     };
 
-    const formatDate = (date: Date): string => {
-        return moment(date).format('YYYY-MM-DD');
+    const formatDate = (date: Date | string): string => {
+        return moment(new Date(date)).format('YYYY-MM-DD');
     };
+
 
     const generateColorForEvent = (content: string): string => {
         if (typeof content !== 'string') {
@@ -85,7 +85,6 @@ function MyCalendar() {
     };
 
     const dateCellRender = (value: moment.Moment) => {
-
         const formattedDate = value.format('YYYY-MM-DD');
         const eventsForDate = events.filter(event => isDateInRange(formattedDate, event.startDate, event.endDate));
 
@@ -125,6 +124,6 @@ function MyCalendar() {
             </div>
         </ConfigProvider>
     );
-};
+}
 
 export default MyCalendar;
