@@ -45,15 +45,10 @@
     align-items: center;
     flex-direction: column;
     width: 52vw;
-    height: 70vh;
 }
 .card-right{
     display: flex;
     flex-direction: column;
-}
-
-.whoishere{
-    max-height: 15vh;
 }
 .doubleclick {
     margin-top: 2rem;

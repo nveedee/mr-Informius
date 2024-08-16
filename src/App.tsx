@@ -67,13 +67,12 @@ function App() {
                                 <div className={"calendarCard"}>
                                     <h1>Kalender</h1>
                                     <Calendar/>
-                                    <img src="../public/icons8-double-click-24.png" alt="png"/>
-                                    <p>Double click</p>
+
                                 </div>
                             ) : (
                                 <div className={"calendarCard"}>
                                     <h1>Menüplan</h1>
-                                    <iframe onDoubleClick={buttonHandler} width="1000vh" height="970rem"
+                                    <iframe onDoubleClick={buttonHandler} width="1000vh" height="1000rem"
                                             name="iframe-field_venue_iframe-232"
                                             id="iframe-field_venue_iframe-232"
                                             allow="accelerometer;autoplay;camera;encrypted-media;geolocation;gyroscope;microphone;payment;picture-in-picture"
@@ -81,16 +80,12 @@ function App() {
                                         Your browser does not support iframes, but you can visit <a
                                         href="https://data.zfv.ch/de/menus/plan/restaurant-axa-superblock"></a>
                                     </iframe>
-                                    <img className={"doubleclick"} src="../public/icons8-double-click-24.png"
-                                         alt="png"/>
-                                    <p>Double click</p>
+
                                 </div>
                             )}
                         </div>
                     </Card>
-                    <Card className={"whoishere"}>
-                        <p>hi</p>
-                    </Card>
+
                 </div>
             </div>
         </div>
