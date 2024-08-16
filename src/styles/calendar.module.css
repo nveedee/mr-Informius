@@ -9,12 +9,6 @@
     text-align: center;
 }
 .calendarCard {
-    height: 84vh;
+    height: 70vh;
     width: 52vw;
-}
-
-.menuPlanImage {
-    max-width: 100%; /* Setze die maximale Breite des Bildes auf 50% der Containerbreite */
-    max-height: 100%; /* Setze die maximale Höhe des Bildes auf 50% der Containerhöhe */
-    object-fit: contain; /* Verhindert das Verzerren des Bildes */
 }

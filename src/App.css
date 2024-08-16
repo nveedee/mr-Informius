@@ -19,7 +19,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
-    max-height: 60vh;
 }
 
 .miniCard {
@@ -30,6 +29,9 @@
 }
 
 .middle-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 63.1%;
 }
 
@@ -43,8 +45,16 @@
     align-items: center;
     flex-direction: column;
     width: 52vw;
+    height: 70vh;
+}
+.card-right{
+    display: flex;
+    flex-direction: column;
 }
 
+.whoishere{
+    max-height: 15vh;
+}
 .doubleclick {
     margin-top: 2rem;
 }
@@ -87,38 +97,5 @@
 }
 
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #4A90E2; /* Dunkles Blau für den Header-Hintergrund */
-    color: #fff; /* Weißer Text */
-    font-size: 1.5rem; /* Größere Schrift für den Begrüßungstext */
-    border-radius: 8px; /* Abgerundete Ecken */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Schatten für Tiefe */
-    width: 80rem;
 
-    h1 {
-        margin: 0;
-        font-size: 1.5rem;
-        font-weight: normal;
-    }
 
-    button {
-        background-color: #ffffff; /* Weißer Hintergrund für die Buttons */
-        color: #4A90E2; /* Gleiche blaue Farbe für den Text der Buttons */
-        border: 2px solid #4A90E2; /* Blauer Rand für die Buttons */
-        border-radius: 5px; /* Abgerundete Ecken für die Buttons */
-        padding: 8px 15px; /* Innenabstand für die Buttons */
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        margin-left: 10px; /* Abstand zwischen den Buttons */
-    }
-
-    button:hover {
-        background-color: #4A90E2; /* Blauer Hintergrund bei Hover */
-        color: #ffffff; /* Weißer Text bei Hover */
-    }
-}

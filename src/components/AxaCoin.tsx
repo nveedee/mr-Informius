@@ -18,11 +18,15 @@ type AuthResponse = {
 export default function AxaCoin() {
     const [apiToken, setApiToken] = useState<string>(INITIAL_TOKEN);
     const [leaderboard, setLeaderboard] = useState<LeaderboardData[]>([]);
+    const [isOnline, setIsOnline] = useState<boolean>(false);
+
+
 
     // Fetch für die Leaderboard-Daten
     useEffect(() => {
         const fetchLeaderboard = async () => {
 
+            setIsOnline(false)
             const response = await fetch("http://192.168.100.16:8080/api/trainees/leaderboard", {
                 headers: {
                     'Authorization': `Bearer ${apiToken}`,
@@ -34,6 +38,7 @@ export default function AxaCoin() {
                 throw new Error(`Error fetching leaderboard: ${response.statusText}`);
             }
 
+            setIsOnline(true)
             const data: LeaderboardData[] = await response.json();
             const sortedLeaderboard = data.sort((a, b) => b.points - a.points);
             setLeaderboard(sortedLeaderboard);
@@ -81,13 +86,18 @@ export default function AxaCoin() {
     return (
         <div className={styles.leaderBoardContainer}>
             <h2 className={styles.cardtitleLeaderboard}>AXA Coins Leaderboard</h2>
-            <ul className={styles.rankingsList}>
-                {leaderboard.map((item, idx) => (
-                    <li key={idx} className={styles.rankingsItem}>
-                        {idx + 1}. {item.username} - {item.points.toFixed(0)} Coins
-                    </li>
-                ))}
-            </ul>
+            {isOnline ?
+                <ul className={styles.rankingsList}>
+                    {leaderboard.map((item, idx) => (
+                        <li key={idx} className={styles.rankingsItem}>
+                            {idx + 1}. {item.username} - {item.points.toFixed(0)} Coins
+                        </li>
+                    ))}
+                </ul>
+                :
+                <p>Backend ist Offline</p>
+            }
+
         </div>
     );
 }
