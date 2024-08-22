@@ -8,6 +8,7 @@ import Weather from "./components/Weather";
 import Keyboard from "./components/Keyboard.tsx";
 import Quotes from "./components/Quotes.tsx";
 import AxaCoin from "./components/AxaCoin.tsx";
+import TakeMeHome from "./components/TakeMeHome.tsx";
 
 type personData = {
     id: string
@@ -22,7 +23,7 @@ function App() {
     const [backgroundClass, setBackgroundClass] = useState('day-background');
     const [id, setid] = useState<string>("");
     const [currentId, setCurrentid] = useState<string>("");
-    const [currenData, setCurrentData] = useState<personData | null>(null);
+    const [currenData, setCurrentData] = useState<personData| null>(null);
     const [dayTime, setDayTime] = useState<string>("Morgen");
 
 
@@ -133,10 +134,22 @@ function App() {
                             </div>
 
                             <Card onClick={changecard} className={"middle-card"}>
-                                {middleCard === 1 && <SbbApi/>}
-                                {middleCard === 2 && <Quotes/>}
-                                {middleCard === 3 && <AxaCoin/>}
+                                {middleCard === 1 && (
+                                    currentId ? (
+                                        currenData ? (
+                                            <TakeMeHome city={currenData.userName} />
+                                        ) : (
+                                            <div>Loading...</div> // Optional: A loading indicator while currenData is undefined
+                                        )
+                                    ) : (
+                                        <SbbApi />
+                                    )
+                                )}
+                                {middleCard === 2 && <Quotes />}
+                                {middleCard === 3 && <AxaCoin />}
                             </Card>
+
+
                         </div>
 
                         <Card onDoubleClick={buttonHandler}>

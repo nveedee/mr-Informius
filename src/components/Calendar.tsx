@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { Calendar, Modal, ConfigProvider } from 'antd';
 import moment from 'moment';
 import 'moment/locale/de';
-// @ts-ignore
 import * as ical from 'ical';
 import styles from '../styles/calendar.module.css';
-import en_GB from 'antd/lib/locale/en_GB';
+import en_GB from 'antd/lib/locale/de_DE';
 
 type Event = {
     startDate: string;
@@ -22,7 +21,7 @@ function MyCalendar() {
         fetch('/Calendar.ics')
             .then(response => response.text())
             .then(data => {
-                const parsedEvents = parseIcsData(data);
+                const parsedEvents = parseIcsData(data) ;
                 setEvents(parsedEvents);
             })
             .catch(error => console.error('Error fetching the ICS file:', error));
@@ -80,8 +79,12 @@ function MyCalendar() {
         }
     };
 
-    const isDateInRange = (date: string, startDate: string, endDate: string) => {
-        return moment(date).isBetween(startDate, endDate, null, '[]');
+    const isDateInRange = (date: string, startDate: string, endDate: string): boolean => {
+        // Convert endDate to a moment object and subtract 1 day
+        const adjustedEndDate = moment(endDate).subtract(1, 'day');
+
+        // Check if the date is between startDate and adjustedEndDate
+        return moment(date).isBetween(startDate, adjustedEndDate, null, '[]');
     };
 
     const dateCellRender = (value: moment.Moment) => {
@@ -110,16 +113,20 @@ function MyCalendar() {
             content: (
                 <div>
                     <p>{event.description}</p>
+                    <p>
+                        {event.startDate} &rarr; {moment(event.endDate).subtract(1, 'day').format('YYYY-MM-DD')}
+                    </p>
+
                 </div>
             ),
-            onOk() { },
+            onOk() {
+            },
         });
     };
 
     return (
         <ConfigProvider locale={en_GB}>
             <div className={styles.calendarCard}>
-                <h2>Kalender</h2>
                 <Calendar cellRender={dateCellRender} />
             </div>
         </ConfigProvider>
