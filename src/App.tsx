@@ -13,6 +13,7 @@ import TakeMeHome from "./components/TakeMeHome.tsx";
 type personData = {
     id: string
     userName: string
+    location: string
 }
 
 
@@ -25,7 +26,7 @@ function App() {
     const [currentId, setCurrentid] = useState<string>("");
     const [currenData, setCurrentData] = useState<personData| null>(null);
     const [dayTime, setDayTime] = useState<string>("Morgen");
-
+    const [prevId, setPrevId] = useState<string>("")
 
     // Use useEffect to add event listener once
     useEffect(() => {
@@ -37,10 +38,18 @@ function App() {
                     .then(response => response.json())
                     .then(data => {
                         console.log(data)
+                        setCurrentid(id)
                     })
-                    .catch(() => setlogin(true));
+                    .catch(error => {
+                        if (error.message === 'Failed to fetch') {
+                            alert("Backend is Offline"); // Network errors like server being offline
+                        } else {
+                            console.error(error); // Log other types of errors
+                            setlogin(true)
+                            setCurrentid(id)
+                        }
+                    });
                 setid("")
-                setCurrentid(id)
             } else {
                 setid(prevuid => prevuid + event.key);
                 setlogin(false)
@@ -91,8 +100,11 @@ function App() {
     }, []);
 
     useEffect(() => {
-        if (currentId) {
-            fetchPersonData();
+        if (currentId) { // TODO: Ron Fehler Error beheben
+            setPrevId(currentId);
+            if (prevId != currentId) {
+                fetchPersonData();
+            }
         }
     }, [currentId]);
 
@@ -102,13 +114,14 @@ function App() {
             .then(data => setCurrentData(data))
             .catch((error) => console.error('Error:', error));
     }
+    {console.log(currenData?.userName)}
 
     return (
         <div className={`pageContainer ${backgroundClass}`}>
             {login ? (
                 <div className={"Nameinput"}>
-                    <h3>Dein Name</h3>
-                    <h6><i>Du kannst den Namen später noch ändern</i></h6>
+                    <h3>Deine persönlichen Angaben</h3>
+                    <h6><i>Du kannst deine Angaben später noch ändern</i></h6>
                     <Keyboard id={currentId} onSubmit={() => {
                         setlogin(false);
                         fetchPersonData()
@@ -127,6 +140,7 @@ function App() {
                     )}
 
                     <div className={"cardContainer"}>
+
                         <div>
                             <div className={"miniCard"}>
                                 <Card><Uhr/></Card>
@@ -137,7 +151,7 @@ function App() {
                                 {middleCard === 1 && (
                                     currentId ? (
                                         currenData ? (
-                                            <TakeMeHome city={currenData.userName} />
+                                            <TakeMeHome city={currenData.location} />
                                         ) : (
                                             <div>Loading...</div> // Optional: A loading indicator while currenData is undefined
                                         )
@@ -162,14 +176,19 @@ function App() {
                                     </div>
                                 ) : (
                                     <div className={"calendarCard"}>
-                                        <iframe onDoubleClick={buttonHandler} width="1000vh" height="970rem"
-                                                name="iframe-field_venue_iframe-232"
-                                                id="iframe-field_venue_iframe-232"
-                                                allow="accelerometer;autoplay;camera;encrypted-media;geolocation;gyroscope;microphone;payment;picture-in-picture"
-                                                src="https://data.zfv.ch/de/menus/plan/restaurant-axa-superblock">
-                                            Your browser does not support iframes, but you can visit <a
-                                            href="https://data.zfv.ch/de/menus/plan/restaurant-axa-superblock"></a>
+                                        <iframe
+                                            width="1000vh"
+                                            height="930rem"
+                                            name="iframe-field_venue_iframe-232"
+                                            id="iframe-field_venue_iframe-232"
+                                            title=""
+                                            sandbox="allow-scripts allow-same-origin"
+                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                            src="https://app.food2050.ch/de/pionier/pionier/menu/mittagsmenue/weekly">
+                                            Your browser does not support iframes, but you can visit
+                                            <a href="https://app.food2050.ch/de/pionier/pionier/menu/mittagsmenue/weekly"></a>
                                         </iframe>
+
                                         <img className={"doubleclick"} src="../public/icons8-double-click-24.png"
                                              alt="png"/>
                                         <p>Double click</p>
@@ -185,5 +204,3 @@ function App() {
 }
 
 export default App;
-
-

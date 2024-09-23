@@ -52,11 +52,12 @@ button {
 .inputfield{
     display: flex;
     align-items: center;
-    width: 60%;
+    width: 80%;
 
     button{
         margin-left: 8px;
         padding: 8px;
+        width: 35%;
     }
 }
 

@@ -9,11 +9,18 @@ type KeyboardProps = {
 
 export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
     const [userName, setUserName] = useState<string>("");
+    const [location, setLocation] = useState<string>("")
     const [isShiftActive, setIsShiftActive] = useState<boolean>(false);
+    const [isNameSelected, setIsNameSelected] = useState<boolean>(true);
+
 
     function handleButtonClick(button: string) {
         const character = isShiftActive ? button.toUpperCase() : button.toLowerCase();
-        setUserName(userName + character);
+        if (isNameSelected) {
+            setUserName(userName + character);
+        } else {
+            setLocation(location + character);
+        }
 
         // Reset shift after one character is typed
         if (isShiftActive) {
@@ -22,28 +29,36 @@ export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
     }
 
     const handleSubmit = () => {
-        fetch(`http://localhost:8080/api/persons`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({id, userName}),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Success:", data);
-
-                if (onSubmit) {
-                    onSubmit();
-                }
+        if (userName === "" || location === ""){
+            alert("Please type something in. - You have empty fields.")
+        } else {
+            fetch(`http://localhost:8080/api/persons`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({id, userName, location}),
             })
-            .catch((error) => console.error("Error:", error));
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Success:", data);
 
+                    if (onSubmit) {
+                        onSubmit();
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
     };
 
     function handleBackSpace() {
-        const newInput = userName.slice(0, -1);
-        setUserName(newInput);
+        if (isNameSelected) {
+            const newInput = userName.slice(0, -1);
+            setUserName(newInput);
+        } else {
+            const newInput = location.slice(0, -1);
+            setLocation(newInput);
+        }
     }
 
     function handleShift() {
@@ -61,10 +76,18 @@ export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
         <div className={styles.Tastatur}>
             <div className={styles.inputfield}>
                 <input
+                    onClick={() => setIsNameSelected(true)}
                     value={userName}
                     readOnly
                     className={styles.input}
                     placeholder="Name..."
+                />
+                <input
+                    onClick={() => setIsNameSelected(false)}
+                    value={location}
+                    readOnly
+                    className={styles.input}
+                    placeholder="Wohnort..."
                 />
                 <button className={styles.submit} onClick={handleSubmit}>Submit</button>
             </div>
