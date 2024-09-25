@@ -32,6 +32,7 @@ function App() {
     useEffect(() => {
         const handleKeypress = (event: KeyboardEvent) => {
             if (event.key === "Enter") {
+                setCurrentData(null)
 
                 fetch(`http://localhost:8080/api/persons/${id}`,
                 )
@@ -39,6 +40,7 @@ function App() {
                     .then(data => {
                         console.log(data)
                         setCurrentid(id)
+                        setCurrentData(data)
                     })
                     .catch(error => {
                         if (error.message === 'Failed to fetch') {
@@ -82,13 +84,13 @@ function App() {
         const updateBackground = () => {
             const hours = new Date().getHours();
             if (hours >= 18 && hours < 24) {
-                setBackgroundClass('night-background');
+                setBackgroundClass('day-background');
                 setDayTime("Abend");
             } else if (hours >= 12 && hours < 18) {
                 setBackgroundClass('day-background');
                 setDayTime("Nachmittag");
             } else if (hours >= 0 && hours < 12) {
-                setBackgroundClass('night-background');
+                setBackgroundClass('day-background');
                 setDayTime("Morgen");
             }
         };
@@ -114,7 +116,6 @@ function App() {
             .then(data => setCurrentData(data))
             .catch((error) => console.error('Error:', error));
     }
-    {console.log(currenData?.userName)}
 
     return (
         <div className={`pageContainer ${backgroundClass}`}>
@@ -125,7 +126,7 @@ function App() {
                     <Keyboard id={currentId} onSubmit={() => {
                         setlogin(false);
                         fetchPersonData()
-                    }}/>
+                    }} llocation={currenData?.location || ""} username={currenData?.userName || ""}/>
                 </div>
             ) : (
                 <>
@@ -133,8 +134,8 @@ function App() {
                         <header>
                             <h1>Guten {dayTime}, {currenData?.userName}</h1>
                             <div>
-                                <button>Settings</button>
-                                <button onClick={() => setCurrentid("")}>abmelden</button>
+                                <button onClick={() => setlogin(true)}>Daten ändern</button>
+                                <button onClick={() => {setCurrentid(""); setCurrentData(null)}}>abmelden</button>
                             </div>
                         </header>
                     )}
@@ -177,8 +178,8 @@ function App() {
                                 ) : (
                                     <div className={"calendarCard"}>
                                         <iframe
-                                            width="1000vh"
-                                            height="930rem"
+                                            width="850vh"
+                                            height="900rem"
                                             name="iframe-field_venue_iframe-232"
                                             id="iframe-field_venue_iframe-232"
                                             title=""

@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff; /* Light sky blue background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+.game {
+    width: 80vw; /* Responsive width */
+    max-width: 600px; /* Max width to limit size on larger screens */
+    height: 300px; /* Increased height for more vertical space */
+    border: 2px solid #333; /* Solid border for clarity */
+    position: relative; /* Position for child elements */
+    overflow: hidden; /* Prevent overflowing elements */
+    background: linear-gradient(to bottom, #ffeb3b 0%, #ffd600 70%, #4caf50 70%, #4caf50 100%); /* Ground with grass */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+#dino {
+    width: 50px;
+    height: 50px;
+    background-image: url('img/trex.png'); /* Ensure correct image path */
+    background-size: cover; /* Cover the entire area */
+    position: absolute;
+    bottom: 10px; /* Adjust for ground level */
+    left: 50px; /* Fixed position */
+}
+
+.jump {
+    animation: jump 0.3s linear;
+}
+
+@keyframes jump {
+    0% {
+        bottom: 10px; /* Starting position */
+    }
+    30% {
+        bottom: 80px; /* Highest point of the jump */
+    }
+    50% {
+        bottom: 60px; /* Slight drop */
+    }
+    80% {
+        bottom: 40px; /* Drop further */
+    }
+    100% {
+        bottom: 10px; /* Back to ground */
+    }
+}
+
+#cactus {
+    width: 20px;
+    height: 40px;
+    position: absolute; /* Absolute positioning */
+    bottom: 10px; /* Align with dino height */
+    left: 580px; /* Start off screen */
+    background-image: url('img/cactus.png'); /* Ensure correct image path */
+    background-size: cover; /* Cover the entire area */
+    animation: block 1s infinite linear; /* Cactus movement */
+}
+
+@keyframes block {
+    0% {
+        left: 580px; /* Start position */
+    }
+    100% {
+        left: -20px; /* End position */
+    }
+}
+
+.score {
+    position: absolute;
+    top: 10px; /* Position at the top */
+    left: 20px; /* Padding from the left */
+    font-size: 24px; /* Larger font size */
+    color: #fff; /* White text for contrast */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for readability */
+    padding: 5px 10px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+.game-over {
+    position: absolute;
+    top: 50%; /* Centered vertically */
+    left: 50%; /* Centered horizontally */
+    transform: translate(-50%, -50%); /* Centering transform */
+    background-color: rgba(255, 0, 0, 0.8); /* Red background for Game Over */
+    color: #fff; /* White text */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    font-size: 24px; /* Larger font size */
+    text-align: center; /* Centered text */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    display: none; /* Hide initially */
+}
+
+.game-over.active {
+    display: block; /* Show when game over */
+}

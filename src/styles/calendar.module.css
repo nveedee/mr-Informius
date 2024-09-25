@@ -11,6 +11,9 @@
 .calendarCard {
     height: 84vh;
     width: 52vw;
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+    border: none; /* Optionally, remove the default border */
+    overflow: hidden; /* Ensure the content inside the iframe doesn't overflow the corners */
 }
 
 .menuPlanImage {

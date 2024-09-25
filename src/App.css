@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
 
-
+* {
+    user-select: none;
+}
 .pageContainer {
     display: flex;
     flex-direction: column;
@@ -8,6 +10,12 @@
     padding: 20px;
     min-height: 100vh; /* Ensures the container fills the entire viewport height */
     min-width: 100vw;
+}
+
+iframe {
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+    border: none; /* Optionally, remove the default border */
+    overflow: hidden; /* Ensure the content inside the iframe doesn't overflow the corners */
 }
 
 .title {

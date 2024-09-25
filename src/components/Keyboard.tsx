@@ -1,15 +1,17 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import styles from "../styles/keyboard.module.css";
 import "react-simple-keyboard/build/css/index.css";
 
 type KeyboardProps = {
     id: string;
+    username : string
+    llocation : string
     onSubmit?: () => void;
 };
 
-export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
-    const [userName, setUserName] = useState<string>("");
-    const [location, setLocation] = useState<string>("")
+export default function MyKeyboard({id,username,llocation, onSubmit}: KeyboardProps) {
+    const [userName, setUserName] = useState<string>(username);
+    const [location, setLocation] = useState<string>(llocation)
     const [isShiftActive, setIsShiftActive] = useState<boolean>(false);
     const [isNameSelected, setIsNameSelected] = useState<boolean>(true);
 
@@ -50,6 +52,10 @@ export default function MyKeyboard({id, onSubmit}: KeyboardProps) {
                 .catch((error) => console.error("Error:", error));
         }
     };
+
+    useEffect(() => {
+
+    }, []);
 
     function handleBackSpace() {
         if (isNameSelected) {

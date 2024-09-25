@@ -86,7 +86,29 @@ export default function AxaCoin() {
                     <li key={idx} className={styles.rankingsItem}>
                         {idx + 1}. {item.username} - {item.points.toFixed(0)} Coins
                     </li>
+
                 ))}
+                <li className={styles.rankingsItem}>
+                    Elias - 600 Coins
+                </li>
+                <li className={styles.rankingsItem}>
+                    Noel - 537 Coins
+                </li>
+                <li className={styles.rankingsItem}>
+                    Ron - 202 Coins
+                </li>
+                <li className={styles.rankingsItem}>
+                    Jay - 181 Coins
+                </li>
+                <li className={styles.rankingsItem}>
+                    Severin - 134 Coins
+                </li>
+                <li className={styles.rankingsItem}>
+                    Adis - 101 Coins
+                </li>
+                    <li className={styles.rankingsItem}>
+                        Simon - 3 Coins
+                    </li>
             </ul>
         </div>
     );
